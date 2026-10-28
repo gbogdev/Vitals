@@ -78,3 +78,23 @@ def test_ui_load_filter_context_close(tmp_path, monkeypatch):
     assert w.ctx.toPlainText().splitlines()[1].startswith(">>")
     w.close()
     assert not w.sampler.isRunning()
+
+
+def test_context_correct_after_user_sorts_table(tmp_path, monkeypatch):
+    monkeypatch.setenv("QT_QPA_PLATFORM", "offscreen")
+    monkeypatch.setenv("DEVSCOPE_CONFIG", str(tmp_path / "cfg.json"))
+    from PySide6.QtCore import Qt
+    from PySide6.QtWidgets import QApplication
+    from devscope.ui.main_window import MainWindow
+
+    app = QApplication.instance() or QApplication(sys.argv)
+    lines = [f"2024-03-01 10:00:0{i} INFO a: msg{i}" for i in range(5)]
+    w = MainWindow()
+    w.on_loaded(list(LogParser().parse_lines(lines)), False)
+    w.filt.wait(5000)
+    app.processEvents()
+    w.log_table.sortByColumn(0, Qt.DescendingOrder)
+    w.log_table.selectRow(0)  # top row is now line 5
+    app.processEvents()
+    assert "msg4" in [l for l in w.ctx.toPlainText().splitlines() if l.startswith(">>")][0]
+    w.close()

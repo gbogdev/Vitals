@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import datetime
 
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import (QCheckBox, QDoubleSpinBox, QFileDialog, QHBoxLayout, QLabel, QLineEdit,
+from PySide6.QtWidgets import (QCheckBox, QDoubleSpinBox, QFileDialog, QGridLayout, QHBoxLayout, QHeaderView, QLabel, QLineEdit,
                                QMainWindow, QMessageBox, QPlainTextEdit, QPushButton, QSplitter, QTableWidget,
                                QTableWidgetItem, QTabWidget, QVBoxLayout, QWidget)
 
@@ -16,7 +16,7 @@ from ..diagnostics import check_log_rules, check_resource_rules
 from ..logparse import LEVELS
 from ..monitor import History
 from ..report import build_report, log_summary, report_json, report_text
-from .widgets import LineChart
+from .widgets import LineChart, StatTile
 from .workers import FilterThread, LogLoadThread, SamplerThread
 
 
@@ -38,7 +38,11 @@ def table(headers):
     t.setSelectionBehavior(QTableWidget.SelectRows)
     t.setAlternatingRowColors(True)
     t.verticalHeader().setVisible(False)
-    t.horizontalHeader().setStretchLastSection(True)
+    h = t.horizontalHeader()
+    h.setStretchLastSection(True)
+    h.setDefaultAlignment(Qt.AlignLeft | Qt.AlignVCenter)
+    h.setSectionResizeMode(QHeaderView.ResizeToContents)
+    h.setSortIndicator(0, Qt.AscendingOrder)
     return t
 
 
@@ -103,14 +107,23 @@ class MainWindow(QMainWindow):
         bar.addWidget(c)
         bar.addStretch()
         v.addLayout(bar)
+        self.tiles = {k: StatTile(t) for k, t in
+                      (("cpu", "CPU"), ("mem", "Memory"), ("disk", "Disk"), ("net", "Network"))}
+        row = QHBoxLayout()
+        for t in self.tiles.values():
+            row.addWidget(t)
+        v.addLayout(row)
         self.charts = {
-            "cpu": LineChart("CPU"), "mem_percent": LineChart("Memory"), "disk_percent": LineChart("Disk"),
-            "net_recv_bps": LineChart("Net down", " B/s", None, "#7fb069"),
-            "net_sent_bps": LineChart("Net up", " B/s", None, "#d9a05b"),
+            "cpu": LineChart("CPU"), "mem_percent": LineChart("Memory"),
+            "net_recv_bps": LineChart("Network down", " B/s", None, "#6aa58a"),
+            "net_sent_bps": LineChart("Network up", " B/s", None, "#b99a63"),
         }
-        for ch in self.charts.values():
-            v.addWidget(ch)
+        grid = QGridLayout()
+        for i, ch in enumerate(self.charts.values()):
+            grid.addWidget(ch, i // 2, i % 2)
+        v.addLayout(grid, 1)
         self.sys_info = QLabel("")
+        self.sys_info.setProperty("muted", True)
         v.addWidget(self.sys_info)
         return w
 
@@ -118,6 +131,7 @@ class MainWindow(QMainWindow):
         w = QWidget()
         v = QVBoxLayout(w)
         self.proc_table = table(["PID", "Name", "CPU %", "Memory (RSS)"])
+        self.proc_table.horizontalHeader().setSortIndicator(2, Qt.DescendingOrder)
         v.addWidget(QLabel("Top processes by CPU (CPU % is per-core; n/a = access denied)"))
         v.addWidget(self.proc_table)
         return w
@@ -203,9 +217,13 @@ class MainWindow(QMainWindow):
         self.history.add(s)
         for k, ch in self.charts.items():
             ch.set_values(self.history.series(k))
-        mem = f"{human(s.mem_used)} / {human(s.mem_total)}"
-        disk = f"{human(s.disk_used)} / {human(s.disk_total)}"
-        self.sys_info.setText(f"Memory {mem}   Disk {disk}   Samples kept: {len(self.history)}")
+        pct = lambda v: "n/a" if v is None else f"{v:.1f}%"
+        self.tiles["cpu"].set(pct(s.cpu), "measured")
+        self.tiles["mem"].set(pct(s.mem_percent), f"{human(s.mem_used)} / {human(s.mem_total)}")
+        self.tiles["disk"].set(pct(s.disk_percent), f"{human(s.disk_used)} / {human(s.disk_total)}")
+        self.tiles["net"].set(f"↓ {human(s.net_recv_bps)}/s", f"↑ {human(s.net_sent_bps)}/s")
+        self.sys_info.setText(f"Samples kept: {len(self.history)} (oldest are dropped at the configured limit). "
+                              "All values are measured.")
         if s.errors:
             self.status.showMessage("Unavailable: " + "; ".join(s.errors[:3]))
         rows = [(p.pid, p.name, "n/a" if p.cpu is None else round(p.cpu, 1), "n/a" if p.rss is None else human(p.rss))
@@ -291,10 +309,14 @@ class MainWindow(QMainWindow):
 
     def show_context(self):
         rows = self.log_table.selectionModel().selectedRows()
-        if not rows or not self.filtered:
+        if not rows or not self.entries:
             return
-        e = self.filtered[rows[0].row()]
-        idx = bisect_left(self.entries, e.lineno, key=lambda x: x.lineno)  # entries are in file order
+        # The table may be user-sorted, so identify the entry by its line number, not its row.
+        lineno = self.log_table.item(rows[0].row(), 0).data(Qt.DisplayRole)
+        idx = bisect_left(self.entries, lineno, key=lambda x: x.lineno)  # entries are in file order
+        if idx >= len(self.entries) or self.entries[idx].lineno != lineno:
+            return
+        e = self.entries[idx]
         lines = []
         for x in analysis.context(self.entries, idx):
             mark = ">>" if x is e else "  "
