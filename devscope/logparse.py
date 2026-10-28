@@ -16,6 +16,7 @@ DEFAULT_RULES = [
                 r"(?P<source>[\w.\-/]+)(?:\[\d+\])?:\s*(?P<message>.*)$"},
 ]
 
+MAX_LINE = 10_000  # chars kept per line; bounds memory on pathological files
 LEVELS = ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
 _ALIASES = {"TRACE": "DEBUG", "DBG": "DEBUG", "NOTICE": "INFO", "WARN": "WARNING",
             "ERR": "ERROR", "SEVERE": "ERROR", "FATAL": "CRITICAL", "CRIT": "CRITICAL"}
@@ -81,7 +82,7 @@ class LogParser:
         continuations. Stops after max_entries."""
         cur, n = None, 0
         for i, raw in enumerate(lines, 1):
-            line = raw.rstrip("\r\n")
+            line = raw.rstrip("\r\n")[:MAX_LINE]
             if not line.strip():
                 continue
             e = self.parse_line(line, i)

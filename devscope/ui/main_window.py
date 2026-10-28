@@ -8,6 +8,7 @@ from PySide6.QtWidgets import (QCheckBox, QDoubleSpinBox, QFileDialog, QHBoxLayo
                                QTableWidgetItem, QTabWidget, QVBoxLayout, QWidget)
 
 import re
+from bisect import bisect_left
 
 from .. import analysis
 from ..config import load_config, save_config
@@ -16,7 +17,7 @@ from ..logparse import LEVELS
 from ..monitor import History
 from ..report import build_report, log_summary, report_json, report_text
 from .widgets import LineChart
-from .workers import LogLoadThread, SamplerThread
+from .workers import FilterThread, LogLoadThread, SamplerThread
 
 
 def human(n):
@@ -43,12 +44,15 @@ def table(headers):
 
 def fill(t, rows):
     t.setSortingEnabled(False)
+    t.setUpdatesEnabled(False)
     t.setRowCount(len(rows))
     for r, row in enumerate(rows):
         for c, v in enumerate(row):
             it = QTableWidgetItem()
             it.setData(Qt.DisplayRole, v)
             t.setItem(r, c, it)
+    t.setUpdatesEnabled(True)
+    t.setSortingEnabled(True)
 
 
 class MainWindow(QMainWindow):
@@ -62,6 +66,10 @@ class MainWindow(QMainWindow):
         self.filtered: list = []
         self.groups: list = []
         self.loader = None
+        self.filt = None
+        self._refilter_pending = False
+        self.all_groups: list = []
+        self.alerts: list = []
 
         tabs = QTabWidget()
         self.setCentralWidget(tabs)
@@ -200,14 +208,14 @@ class MainWindow(QMainWindow):
         self.sys_info.setText(f"Memory {mem}   Disk {disk}   Samples kept: {len(self.history)}")
         if s.errors:
             self.status.showMessage("Unavailable: " + "; ".join(s.errors[:3]))
-        rows = [(p.pid, p.name, -1 if p.cpu is None else round(p.cpu, 1), "n/a" if p.rss is None else human(p.rss))
+        rows = [(p.pid, p.name, "n/a" if p.cpu is None else round(p.cpu, 1), "n/a" if p.rss is None else human(p.rss))
                 for p in s.procs[:100]]
         fill(self.proc_table, rows)
         self.refresh_alerts()
 
     def refresh_alerts(self):
         alerts = check_resource_rules(self.history.samples(), self.cfg["resource_rules"])
-        alerts += check_log_rules(self.groups, self.cfg["log_rule"])
+        alerts += check_log_rules(self.all_groups, self.cfg["log_rule"])
         self.alerts = alerts
         fill(self.alert_table, [(a.kind, a.basis, a.title, a.detail) for a in alerts])
 
@@ -227,6 +235,7 @@ class MainWindow(QMainWindow):
 
     def on_loaded(self, entries, truncated):
         self.entries = entries
+        self.all_groups = analysis.group_recurring(entries, self.cfg["log_rule"]["min_level"])
         msg = f"Loaded {len(entries)} entries"
         if truncated:
             msg += f" (stopped at limit {self.cfg['max_log_entries']})"
@@ -250,10 +259,28 @@ class MainWindow(QMainWindow):
                 self.search.text(), self.regex_cb.isChecked(), self.case_cb.isChecked(),
                 {k for k, c in self.level_cbs.items() if c.isChecked()}, self.source.text(),
                 self._parse_dt(self.start.text()), self._parse_dt(self.end.text()))
-            self.filtered = analysis.apply_filter(self.entries, f)
+            if f.text and f.regex:
+                re.compile(f.text)  # fail fast on syntax errors before starting the worker
         except (ValueError, re.error) as ex:
             QMessageBox.warning(self, "Filter", str(ex))
             return
+        if self.filt and self.filt.isRunning():
+            self._refilter_pending = True  # rerun with the latest inputs when the current run ends
+            return
+        self.status.showMessage("Filtering...")
+        self.filt = FilterThread(self.entries, f)
+        self.filt.done.connect(self.on_filtered)
+        self.filt.failed.connect(lambda m: QMessageBox.warning(self, "Filter", m))
+        self.filt.finished.connect(self._filter_finished)
+        self.filt.start()
+
+    def _filter_finished(self):
+        if self._refilter_pending:
+            self._refilter_pending = False
+            self.refilter()
+
+    def on_filtered(self, filtered):
+        self.filtered = filtered
         shown = self.filtered[:20000]  # keep table responsive; export uses the full filtered list
         fill(self.log_table, [(e.lineno, str(e.timestamp or ""), e.level or "", e.source, e.message) for e in shown])
         self.groups = analysis.group_recurring(self.filtered, self.cfg["log_rule"]["min_level"])
@@ -267,10 +294,10 @@ class MainWindow(QMainWindow):
         if not rows or not self.filtered:
             return
         e = self.filtered[rows[0].row()]
-        idx = e_idx = self.entries.index(e)
+        idx = bisect_left(self.entries, e.lineno, key=lambda x: x.lineno)  # entries are in file order
         lines = []
         for x in analysis.context(self.entries, idx):
-            mark = ">>" if x is self.entries[e_idx] else "  "
+            mark = ">>" if x is e else "  "
             lines.append(f"{mark} {x.lineno}: {x.timestamp or ''} {x.level or ''} {x.source} {x.full_text}")
         self.ctx.setPlainText("\n".join(lines))
 
@@ -298,4 +325,6 @@ class MainWindow(QMainWindow):
         if self.loader and self.loader.isRunning():
             self.loader.stop()
             self.loader.wait(5000)
+        if self.filt and self.filt.isRunning():
+            self.filt.wait(5000)
         super().closeEvent(ev)

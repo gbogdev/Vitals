@@ -97,12 +97,17 @@ def _row(e: LogEntry) -> list:
     return [e.lineno, e.timestamp.isoformat(sep=" ") if e.timestamp else "", e.level or "", e.source, e.full_text]
 
 
+def _csv_safe(v):
+    """Neutralize spreadsheet formula injection (cell text starting with = + - @ tab CR)."""
+    return "'" + v if isinstance(v, str) and v[:1] in ("=", "+", "-", "@", "\t", "\r") else v
+
+
 def export_entries(entries: list, fmt: str) -> str:
     if fmt == "csv":
         buf = io.StringIO()
         w = csv.writer(buf)
         w.writerow(["line", "timestamp", "level", "source", "message"])
-        w.writerows(_row(e) for e in entries)
+        w.writerows([_csv_safe(c) for c in _row(e)] for e in entries)
         return buf.getvalue()
     if fmt == "json":
         keys = ["line", "timestamp", "level", "source", "message"]
