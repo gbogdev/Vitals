@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from devscope.logparse import LogParser, normalize_level
+from vitals.logparse import LogParser, normalize_level
 
 LINES = [
     "2024-03-01 10:00:00,123 INFO [app.db] connected to 10.0.0.1",

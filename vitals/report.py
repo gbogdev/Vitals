@@ -37,7 +37,7 @@ def _fmt(v, unit):
 
 
 def report_text(report: dict) -> str:
-    L = [f"DevScope diagnostic report - {report['generated']}",
+    L = [f"Vitals diagnostic report - {report['generated']}",
          f"Host: {report['host']['os']} (Python {report['host']['python']})",
          f"Samples: {report['samples']}", "", "Measured metrics (min / avg / max):"]
     for m in METRICS:

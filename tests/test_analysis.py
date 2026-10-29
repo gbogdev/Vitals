@@ -2,9 +2,9 @@ from datetime import datetime
 
 import pytest
 
-from devscope.analysis import (LogFilter, apply_filter, context, export_entries,
+from vitals.analysis import (LogFilter, apply_filter, context, export_entries,
                                group_recurring, normalize_message)
-from devscope.logparse import LogParser
+from vitals.logparse import LogParser
 
 LINES = [
     "2024-03-01 10:00:00 INFO a.x: started",

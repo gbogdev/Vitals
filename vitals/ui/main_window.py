@@ -63,7 +63,7 @@ def fill(t, rows):
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("DevScope")
+        self.setWindowTitle("Vitals")
         self.resize(1100, 700)
         self.cfg = load_config()
         self.history = History(self.cfg["history_samples"])
@@ -86,7 +86,7 @@ class MainWindow(QMainWindow):
         side.setFixedWidth(190)
         sv = QVBoxLayout(side)
         sv.setContentsMargins(12, 16, 12, 12)
-        brand = QLabel("DevScope")
+        brand = QLabel("Vitals")
         brand.setObjectName("brand")
         sv.addWidget(brand)
         self.nav = QListWidget()
@@ -417,7 +417,7 @@ class MainWindow(QMainWindow):
                 fh.write(analysis.export_entries(self.filtered, fmt))
 
     def export_report(self):
-        path, _ = QFileDialog.getSaveFileName(self, "Export report", "devscope-report.txt", "Text (*.txt);;JSON (*.json)")
+        path, _ = QFileDialog.getSaveFileName(self, "Export report", "vitals-report.txt", "Text (*.txt);;JSON (*.json)")
         if not path:
             return
         summ = log_summary(self.filtered or self.entries, self.groups) if self.entries else None

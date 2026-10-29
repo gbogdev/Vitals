@@ -1,4 +1,4 @@
-# DevScope
+# Vitals
 
 Desktop utility (Python, PySide6) for inspecting local system resource usage and investigating application logs. Everything stays on your machine; nothing is uploaded.
 
@@ -9,7 +9,7 @@ Desktop utility (Python, PySide6) for inspecting local system resource usage and
 - **Diagnostics:** configurable threshold rules for sustained high CPU/memory/disk usage and recurring log errors. These are simple threshold comparisons on measured values. An alert means a rule matched; it is not a confirmed fault.
 - **Reports:** export a text or JSON report of measured aggregates, alerts and log summary.
 
-Config: `%APPDATA%\DevScope\config.json` (override with `DEVSCOPE_CONFIG`). Missing keys use defaults; see `devscope/config.py`.
+Config: `%APPDATA%\Vitals\config.json` (override with `VITALS_CONFIG`). Missing keys use defaults; see `vitals/config.py`.
 
 ## Install
 
@@ -17,7 +17,7 @@ Config: `%APPDATA%\DevScope\config.json` (override with `DEVSCOPE_CONFIG`). Miss
 python -m venv .venv
 .venv\Scripts\activate
 pip install -r requirements.txt
-python -m devscope
+python -m vitals
 ```
 
 ## Test
@@ -33,10 +33,10 @@ Tests cover log parsing, filtering/grouping, diagnostic rules, metric aggregatio
 
 ```
 pip install pyinstaller
-pyinstaller --noconsole --name DevScope run_devscope.py
+pyinstaller --noconsole --name Vitals --icon assets/vitals.ico run_vitals.py
 ```
 
-The executable is written to `dist\DevScope\`. The packaged build has not been tested here.
+The executable is written to `dist\Vitals\`. The packaged build has not been tested here.
 
 ## Notes
 

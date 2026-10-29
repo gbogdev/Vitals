@@ -10,6 +10,8 @@ def main() -> int:
     app = QApplication(sys.argv)
     app.setStyle("Fusion")
     app.setStyleSheet(DARK_QSS)
+    from .ui.icon import make_icon
+    app.setWindowIcon(make_icon())
     w = MainWindow()
     w.show()
     return app.exec()

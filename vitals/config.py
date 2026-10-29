@@ -17,8 +17,8 @@ def default_config() -> dict:
 
 
 def config_path() -> Path:
-    env = os.environ.get("DEVSCOPE_CONFIG")
-    return Path(env) if env else Path(os.environ.get("APPDATA", Path.home())) / "DevScope" / "config.json"
+    env = os.environ.get("VITALS_CONFIG")
+    return Path(env) if env else Path(os.environ.get("APPDATA", Path.home())) / "Vitals" / "config.json"
 
 
 def load_config(path: Optional[Path] = None) -> dict:

@@ -1,5 +1,5 @@
 [project]
-name = "devscope"
+name = "vitals"
 version = "0.1.0"
 description = "Local system monitor and log analyzer"
 requires-python = ">=3.10"
@@ -9,10 +9,10 @@ dependencies = ["PySide6-Essentials>=6.5", "psutil>=5.9"]
 dev = ["pytest>=7", "pyinstaller>=6"]
 
 [project.scripts]
-devscope = "devscope.__main__:main"
+vitals = "vitals.__main__:main"
 
 [tool.setuptools]
-packages = ["devscope", "devscope.ui"]
+packages = ["vitals", "vitals.ui"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

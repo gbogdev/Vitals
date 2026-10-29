@@ -4,9 +4,9 @@ import sys
 
 import pytest
 
-from devscope.analysis import export_entries
-from devscope.config import load_config, save_config
-from devscope.logparse import MAX_LINE, LogParser
+from vitals.analysis import export_entries
+from vitals.config import load_config, save_config
+from vitals.logparse import MAX_LINE, LogParser
 
 
 def entries(lines):
@@ -55,9 +55,9 @@ def test_save_config_roundtrip_atomic(tmp_path):
 def test_ui_load_filter_context_close(tmp_path, monkeypatch):
     """End to end: load -> filter in worker thread -> context picks the right duplicate -> clean shutdown."""
     monkeypatch.setenv("QT_QPA_PLATFORM", "offscreen")
-    monkeypatch.setenv("DEVSCOPE_CONFIG", str(tmp_path / "cfg.json"))
+    monkeypatch.setenv("VITALS_CONFIG", str(tmp_path / "cfg.json"))
     from PySide6.QtWidgets import QApplication
-    from devscope.ui.main_window import MainWindow
+    from vitals.ui.main_window import MainWindow
 
     app = QApplication.instance() or QApplication(sys.argv)
     log = tmp_path / "a.log"
@@ -82,10 +82,10 @@ def test_ui_load_filter_context_close(tmp_path, monkeypatch):
 
 def test_context_correct_after_user_sorts_table(tmp_path, monkeypatch):
     monkeypatch.setenv("QT_QPA_PLATFORM", "offscreen")
-    monkeypatch.setenv("DEVSCOPE_CONFIG", str(tmp_path / "cfg.json"))
+    monkeypatch.setenv("VITALS_CONFIG", str(tmp_path / "cfg.json"))
     from PySide6.QtCore import Qt
     from PySide6.QtWidgets import QApplication
-    from devscope.ui.main_window import MainWindow
+    from vitals.ui.main_window import MainWindow
 
     app = QApplication.instance() or QApplication(sys.argv)
     lines = [f"2024-03-01 10:00:0{i} INFO a: msg{i}" for i in range(5)]

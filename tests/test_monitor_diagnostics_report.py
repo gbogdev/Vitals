@@ -1,11 +1,11 @@
 import json
 from datetime import datetime
 
-from devscope.analysis import group_recurring
-from devscope.diagnostics import check_log_rules, check_resource_rules
-from devscope.logparse import LogParser
-from devscope.monitor import Collector, History, Sample, aggregate, summarize
-from devscope.report import build_report, log_summary, report_json, report_text
+from vitals.analysis import group_recurring
+from vitals.diagnostics import check_log_rules, check_resource_rules
+from vitals.logparse import LogParser
+from vitals.monitor import Collector, History, Sample, aggregate, summarize
+from vitals.report import build_report, log_summary, report_json, report_text
 
 
 def mk(vals, key="cpu", step=10.0):
