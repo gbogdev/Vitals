@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vitals - local system monitor and log analyzer</title>
+<meta name="description" content="Vitals is a free, local-only Windows desktop utility for watching resource usage and investigating log errors.">
+<style>
+  :root { --bg:#1e1f22; --surface:#26282c; --border:#3a3d43; --text:#dcdde0; --muted:#8b8f97; --accent:#5b8bc9; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:16px/1.6 "Segoe UI", system-ui, sans-serif; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 20px; }
+  header { padding: 56px 0 28px; }
+  h1 { font-size: 2.4rem; margin: 0 0 6px; }
+  .tag { color: var(--muted); font-size: 1.1rem; margin: 0 0 24px; }
+  .btn { display:inline-block; padding: 10px 20px; border-radius: 6px; text-decoration:none; font-weight:600;
+         border:1px solid var(--border); color:var(--text); background:var(--surface); margin-right: 8px; }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color:#0f1115; }
+  img.shot { width:100%; border:1px solid var(--border); border-radius:8px; margin: 28px 0; }
+  .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:14px; margin: 8px 0 32px; }
+  .card { background: var(--surface); border:1px solid var(--border); border-radius:8px; padding: 14px 16px; }
+  .card h3 { margin: 0 0 4px; font-size: 1rem; }
+  .card p { margin: 0; color: var(--muted); font-size: .95rem; }
+  h2 { font-size: 1.3rem; margin-top: 32px; }
+  .note { color: var(--muted); font-size: .95rem; }
+  footer { border-top:1px solid var(--border); margin-top: 40px; padding: 20px 0 40px; color: var(--muted); font-size:.9rem; }
+  a { color: var(--accent); }
+  code { background: var(--surface); padding: 1px 6px; border-radius: 4px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Vitals</h1>
+    <p class="tag">A simple, local-only monitor for system resources and application logs.</p>
+    <a class="btn primary" href="https://github.com/gbogdev/Vitals/releases/latest">Download for Windows</a>
+    <a class="btn" href="https://github.com/gbogdev/Vitals">Source on GitHub</a>
+  </header>
+
+  <img class="shot" src="screenshot.png" alt="Vitals Logs page showing a filtered log table with context view">
+
+  <div class="grid">
+    <div class="card"><h3>System monitoring</h3><p>CPU, memory, disk, network and top processes, with adjustable refresh and bounded history.</p></div>
+    <div class="card"><h3>Log analysis</h3><p>Open large text logs, search, filter by level, time and source, group recurring errors, see surrounding context.</p></div>
+    <div class="card"><h3>Diagnostics</h3><p>Configurable threshold rules for sustained high usage and recurring errors. Alerts are rule matches, not confirmed faults.</p></div>
+    <div class="card"><h3>Reports</h3><p>Export a text or JSON report of measured values, alerts and a log summary.</p></div>
+  </div>
+
+  <h2>Private by design</h2>
+  <p>Vitals runs entirely on your computer. It does not upload system information or logs, and it makes no network connections of its own.</p>
+
+  <h2>Run it</h2>
+  <p>Download the zip from the latest release, extract the whole folder, and run <code>Vitals.exe</code>. Or run from source:</p>
+  <p><code>pip install -r requirements.txt</code> then <code>python -m vitals</code></p>
+  <p class="note">The release build is unsigned, so Windows SmartScreen or your antivirus may warn about it. It has only been tested on the developer's own Windows machine. You can always build it yourself from the source.</p>
+
+  <footer>
+    Vitals is free software released under the <a href="https://github.com/gbogdev/Vitals/blob/main/LICENSE">GNU GPL v3</a>.
+    Parts of the code were written with help from an AI coding assistant.
+  </footer>
+</div>
+</body>
+</html>

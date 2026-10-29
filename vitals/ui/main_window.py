@@ -355,11 +355,16 @@ class MainWindow(QMainWindow):
                 pass
         raise ValueError(f"Bad date: {text}")
 
+    def _levels(self):
+        """None (no level filter) when every box is ticked, so entries without a recognised level stay visible."""
+        picked = {k for k, c in self.level_cbs.items() if c.isChecked()}
+        return None if len(picked) == len(self.level_cbs) else picked
+
     def refilter(self):
         try:
             f = analysis.LogFilter(
                 self.search.text(), self.regex_cb.isChecked(), self.case_cb.isChecked(),
-                {k for k, c in self.level_cbs.items() if c.isChecked()}, self.source.text(),
+                self._levels(), self.source.text(),
                 self._parse_dt(self.start.text()), self._parse_dt(self.end.text()))
             if f.text and f.regex:
                 re.compile(f.text)  # fail fast on syntax errors before starting the worker

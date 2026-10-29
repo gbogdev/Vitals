@@ -98,3 +98,25 @@ def test_context_correct_after_user_sorts_table(tmp_path, monkeypatch):
     app.processEvents()
     assert "msg4" in [l for l in w.ctx.toPlainText().splitlines() if l.startswith(">>")][0]
     w.close()
+
+
+def test_bom_file_first_line_parsed(tmp_path):
+    p = tmp_path / "bom.log"
+    p.write_bytes(b"\xef\xbb\xbf2024-03-01 10:00:00 ERROR a: first\n2024-03-01 10:00:01 INFO a: second\n")
+    e = list(LogParser().parse_file(str(p)))
+    assert len(e) == 2 and e[0].level == "ERROR" and e[0].message == "first"
+
+
+def test_unrecognised_level_entries_visible_when_all_levels_ticked(tmp_path, monkeypatch):
+    monkeypatch.setenv("QT_QPA_PLATFORM", "offscreen")
+    monkeypatch.setenv("VITALS_CONFIG", str(tmp_path / "cfg.json"))
+    from PySide6.QtWidgets import QApplication
+    from vitals.ui.main_window import MainWindow
+
+    app = QApplication.instance() or QApplication(sys.argv)
+    w = MainWindow()
+    w.on_loaded(list(LogParser().parse_lines(["no timestamp here", "2024-03-01 10:00:01 INFO a: ok"])), False)
+    w.filt.wait(5000)
+    app.processEvents()
+    assert len(w.filtered) == 2
+    w.close()

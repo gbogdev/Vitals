@@ -101,6 +101,6 @@ class LogParser:
         if cur:
             yield cur
 
-    def parse_file(self, path: str, max_entries: int = 500_000, encoding: str = "utf-8") -> Iterator[LogEntry]:
+    def parse_file(self, path: str, max_entries: int = 500_000, encoding: str = "utf-8-sig") -> Iterator[LogEntry]:
         with open(path, "r", encoding=encoding, errors="replace") as f:
             yield from self.parse_lines(f, max_entries)

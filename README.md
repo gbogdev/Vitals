@@ -1,5 +1,7 @@
 # Vitals
 
+Project page: https://gbogdev.github.io/Vitals/
+
 Desktop utility (Python, PySide6) for inspecting local system resource usage and investigating application logs. Everything stays on your machine; nothing is uploaded.
 
 ## Features
@@ -37,6 +39,10 @@ pyinstaller --noconsole --name Vitals --icon assets/vitals.ico run_vitals.py
 ```
 
 The executable is written to `dist\Vitals\`. The packaged build has not been tested here.
+
+## License
+
+GNU General Public License v3.0 only. See [LICENSE](LICENSE).
 
 ## Notes
 

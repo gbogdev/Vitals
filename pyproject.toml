@@ -3,6 +3,7 @@ name = "vitals"
 version = "0.1.0"
 description = "Local system monitor and log analyzer"
 requires-python = ">=3.10"
+license = "GPL-3.0-only"
 dependencies = ["PySide6-Essentials>=6.5", "psutil>=5.9"]
 
 [project.optional-dependencies]
