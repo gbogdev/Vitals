@@ -1,0 +1,550 @@
+﻿2024-03-01 09:00:00 ERROR [db.pool] Connection timeout after 0ms on conn 1000
+2024-03-01 09:00:07 INFO [web.api] GET /users/1 200
+2024-03-01 09:00:14 WARNING [web.api] Slow request: 6ms
+2024-03-01 09:00:21 ERROR [web.auth] Token validation failed for user 3
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:00:28 DEBUG [cache] hit ratio 0.4
+2024-03-01 09:00:35 INFO [web.api] POST /orders/5 201
+2024-03-01 09:00:42 INFO [web.api] POST /orders/6 201
+2024-03-01 09:00:49 INFO [web.api] POST /orders/7 201
+2024-03-01 09:00:56 ERROR [db.pool] Connection timeout after 8ms on conn 1008
+2024-03-01 09:01:03 INFO [web.api] GET /users/9 200
+2024-03-01 09:01:10 WARNING [web.api] Slow request: 30ms
+2024-03-01 09:01:17 ERROR [web.auth] Token validation failed for user 11
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:01:24 DEBUG [cache] hit ratio 0.12
+2024-03-01 09:01:31 INFO [web.api] POST /orders/13 201
+2024-03-01 09:01:38 INFO [web.api] POST /orders/14 201
+2024-03-01 09:01:45 INFO [web.api] POST /orders/15 201
+2024-03-01 09:01:52 ERROR [db.pool] Connection timeout after 16ms on conn 1016
+2024-03-01 09:01:59 INFO [web.api] GET /users/17 200
+2024-03-01 09:02:06 WARNING [web.api] Slow request: 54ms
+2024-03-01 09:02:13 ERROR [web.auth] Token validation failed for user 19
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:02:20 DEBUG [cache] hit ratio 0.20
+2024-03-01 09:02:27 INFO [web.api] POST /orders/21 201
+2024-03-01 09:02:34 INFO [web.api] POST /orders/22 201
+2024-03-01 09:02:41 INFO [web.api] POST /orders/23 201
+2024-03-01 09:02:48 ERROR [db.pool] Connection timeout after 24ms on conn 1024
+2024-03-01 09:02:55 INFO [web.api] GET /users/25 200
+2024-03-01 09:03:02 WARNING [web.api] Slow request: 78ms
+2024-03-01 09:03:09 ERROR [web.auth] Token validation failed for user 27
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:03:16 DEBUG [cache] hit ratio 0.28
+2024-03-01 09:03:23 INFO [web.api] POST /orders/29 201
+2024-03-01 09:03:30 INFO [web.api] POST /orders/30 201
+2024-03-01 09:03:37 INFO [web.api] POST /orders/31 201
+2024-03-01 09:03:44 ERROR [db.pool] Connection timeout after 32ms on conn 1032
+2024-03-01 09:03:51 INFO [web.api] GET /users/33 200
+2024-03-01 09:03:58 WARNING [web.api] Slow request: 102ms
+2024-03-01 09:04:05 ERROR [web.auth] Token validation failed for user 35
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:04:12 DEBUG [cache] hit ratio 0.36
+2024-03-01 09:04:19 INFO [web.api] POST /orders/37 201
+2024-03-01 09:04:26 INFO [web.api] POST /orders/38 201
+2024-03-01 09:04:33 INFO [web.api] POST /orders/39 201
+2024-03-01 09:04:40 ERROR [db.pool] Connection timeout after 40ms on conn 1040
+2024-03-01 09:04:47 INFO [web.api] GET /users/41 200
+2024-03-01 09:04:54 WARNING [web.api] Slow request: 126ms
+2024-03-01 09:05:01 ERROR [web.auth] Token validation failed for user 43
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:05:08 DEBUG [cache] hit ratio 0.44
+2024-03-01 09:05:15 INFO [web.api] POST /orders/45 201
+2024-03-01 09:05:22 INFO [web.api] POST /orders/46 201
+2024-03-01 09:05:29 INFO [web.api] POST /orders/47 201
+2024-03-01 09:05:36 ERROR [db.pool] Connection timeout after 48ms on conn 1048
+2024-03-01 09:05:43 INFO [web.api] GET /users/49 200
+2024-03-01 09:05:50 WARNING [web.api] Slow request: 150ms
+2024-03-01 09:05:57 ERROR [web.auth] Token validation failed for user 51
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:06:04 DEBUG [cache] hit ratio 0.52
+2024-03-01 09:06:11 INFO [web.api] POST /orders/53 201
+2024-03-01 09:06:18 INFO [web.api] POST /orders/54 201
+2024-03-01 09:06:25 INFO [web.api] POST /orders/55 201
+2024-03-01 09:06:32 ERROR [db.pool] Connection timeout after 56ms on conn 1056
+2024-03-01 09:06:39 INFO [web.api] GET /users/57 200
+2024-03-01 09:06:46 WARNING [web.api] Slow request: 174ms
+2024-03-01 09:06:53 ERROR [web.auth] Token validation failed for user 59
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:07:00 DEBUG [cache] hit ratio 0.60
+2024-03-01 09:07:07 INFO [web.api] POST /orders/61 201
+2024-03-01 09:07:14 INFO [web.api] POST /orders/62 201
+2024-03-01 09:07:21 INFO [web.api] POST /orders/63 201
+2024-03-01 09:07:28 ERROR [db.pool] Connection timeout after 64ms on conn 1064
+2024-03-01 09:07:35 INFO [web.api] GET /users/65 200
+2024-03-01 09:07:42 WARNING [web.api] Slow request: 198ms
+2024-03-01 09:07:49 ERROR [web.auth] Token validation failed for user 67
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:07:56 DEBUG [cache] hit ratio 0.68
+2024-03-01 09:08:03 INFO [web.api] POST /orders/69 201
+2024-03-01 09:08:10 INFO [web.api] POST /orders/70 201
+2024-03-01 09:08:17 INFO [web.api] POST /orders/71 201
+2024-03-01 09:08:24 ERROR [db.pool] Connection timeout after 72ms on conn 1072
+2024-03-01 09:08:31 INFO [web.api] GET /users/73 200
+2024-03-01 09:08:38 WARNING [web.api] Slow request: 222ms
+2024-03-01 09:08:45 ERROR [web.auth] Token validation failed for user 75
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:08:52 DEBUG [cache] hit ratio 0.76
+2024-03-01 09:08:59 INFO [web.api] POST /orders/77 201
+2024-03-01 09:09:06 INFO [web.api] POST /orders/78 201
+2024-03-01 09:09:13 INFO [web.api] POST /orders/79 201
+2024-03-01 09:09:20 ERROR [db.pool] Connection timeout after 80ms on conn 1080
+2024-03-01 09:09:27 INFO [web.api] GET /users/81 200
+2024-03-01 09:09:34 WARNING [web.api] Slow request: 246ms
+2024-03-01 09:09:41 ERROR [web.auth] Token validation failed for user 83
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:09:48 DEBUG [cache] hit ratio 0.84
+2024-03-01 09:09:55 INFO [web.api] POST /orders/85 201
+2024-03-01 09:10:02 INFO [web.api] POST /orders/86 201
+2024-03-01 09:10:09 INFO [web.api] POST /orders/87 201
+2024-03-01 09:10:16 ERROR [db.pool] Connection timeout after 88ms on conn 1088
+2024-03-01 09:10:23 INFO [web.api] GET /users/89 200
+2024-03-01 09:10:30 WARNING [web.api] Slow request: 270ms
+2024-03-01 09:10:37 ERROR [web.auth] Token validation failed for user 91
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:10:44 DEBUG [cache] hit ratio 0.92
+2024-03-01 09:10:51 INFO [web.api] POST /orders/93 201
+2024-03-01 09:10:58 INFO [web.api] POST /orders/94 201
+2024-03-01 09:11:05 INFO [web.api] POST /orders/95 201
+2024-03-01 09:11:12 ERROR [db.pool] Connection timeout after 96ms on conn 1096
+2024-03-01 09:11:19 INFO [web.api] GET /users/97 200
+2024-03-01 09:11:26 WARNING [web.api] Slow request: 294ms
+2024-03-01 09:11:33 ERROR [web.auth] Token validation failed for user 99
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:11:40 DEBUG [cache] hit ratio 0.0
+2024-03-01 09:11:47 INFO [web.api] POST /orders/101 201
+2024-03-01 09:11:54 INFO [web.api] POST /orders/102 201
+2024-03-01 09:12:01 INFO [web.api] POST /orders/103 201
+2024-03-01 09:12:08 ERROR [db.pool] Connection timeout after 104ms on conn 1104
+2024-03-01 09:12:15 INFO [web.api] GET /users/105 200
+2024-03-01 09:12:22 WARNING [web.api] Slow request: 318ms
+2024-03-01 09:12:29 ERROR [web.auth] Token validation failed for user 107
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:12:36 DEBUG [cache] hit ratio 0.8
+2024-03-01 09:12:43 INFO [web.api] POST /orders/109 201
+2024-03-01 09:12:50 INFO [web.api] POST /orders/110 201
+2024-03-01 09:12:57 INFO [web.api] POST /orders/111 201
+2024-03-01 09:13:04 ERROR [db.pool] Connection timeout after 112ms on conn 1112
+2024-03-01 09:13:11 INFO [web.api] GET /users/113 200
+2024-03-01 09:13:18 WARNING [web.api] Slow request: 342ms
+2024-03-01 09:13:25 ERROR [web.auth] Token validation failed for user 115
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:13:32 DEBUG [cache] hit ratio 0.16
+2024-03-01 09:13:39 INFO [web.api] POST /orders/117 201
+2024-03-01 09:13:46 INFO [web.api] POST /orders/118 201
+2024-03-01 09:13:53 INFO [web.api] POST /orders/119 201
+2024-03-01 09:14:00 ERROR [db.pool] Connection timeout after 120ms on conn 1120
+2024-03-01 09:14:07 INFO [web.api] GET /users/121 200
+2024-03-01 09:14:14 WARNING [web.api] Slow request: 366ms
+2024-03-01 09:14:21 ERROR [web.auth] Token validation failed for user 123
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:14:28 DEBUG [cache] hit ratio 0.24
+2024-03-01 09:14:35 INFO [web.api] POST /orders/125 201
+2024-03-01 09:14:42 INFO [web.api] POST /orders/126 201
+2024-03-01 09:14:49 INFO [web.api] POST /orders/127 201
+2024-03-01 09:14:56 ERROR [db.pool] Connection timeout after 128ms on conn 1128
+2024-03-01 09:15:03 INFO [web.api] GET /users/129 200
+2024-03-01 09:15:10 WARNING [web.api] Slow request: 390ms
+2024-03-01 09:15:17 ERROR [web.auth] Token validation failed for user 131
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:15:24 DEBUG [cache] hit ratio 0.32
+2024-03-01 09:15:31 INFO [web.api] POST /orders/133 201
+2024-03-01 09:15:38 INFO [web.api] POST /orders/134 201
+2024-03-01 09:15:45 INFO [web.api] POST /orders/135 201
+2024-03-01 09:15:52 ERROR [db.pool] Connection timeout after 136ms on conn 1136
+2024-03-01 09:15:59 INFO [web.api] GET /users/137 200
+2024-03-01 09:16:06 WARNING [web.api] Slow request: 414ms
+2024-03-01 09:16:13 ERROR [web.auth] Token validation failed for user 139
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:16:20 DEBUG [cache] hit ratio 0.40
+2024-03-01 09:16:27 INFO [web.api] POST /orders/141 201
+2024-03-01 09:16:34 INFO [web.api] POST /orders/142 201
+2024-03-01 09:16:41 INFO [web.api] POST /orders/143 201
+2024-03-01 09:16:48 ERROR [db.pool] Connection timeout after 144ms on conn 1144
+2024-03-01 09:16:55 INFO [web.api] GET /users/145 200
+2024-03-01 09:17:02 WARNING [web.api] Slow request: 438ms
+2024-03-01 09:17:09 ERROR [web.auth] Token validation failed for user 147
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:17:16 DEBUG [cache] hit ratio 0.48
+2024-03-01 09:17:23 INFO [web.api] POST /orders/149 201
+2024-03-01 09:17:30 INFO [web.api] POST /orders/150 201
+2024-03-01 09:17:37 INFO [web.api] POST /orders/151 201
+2024-03-01 09:17:44 ERROR [db.pool] Connection timeout after 152ms on conn 1152
+2024-03-01 09:17:51 INFO [web.api] GET /users/153 200
+2024-03-01 09:17:58 WARNING [web.api] Slow request: 462ms
+2024-03-01 09:18:05 ERROR [web.auth] Token validation failed for user 155
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:18:12 DEBUG [cache] hit ratio 0.56
+2024-03-01 09:18:19 INFO [web.api] POST /orders/157 201
+2024-03-01 09:18:26 INFO [web.api] POST /orders/158 201
+2024-03-01 09:18:33 INFO [web.api] POST /orders/159 201
+2024-03-01 09:18:40 ERROR [db.pool] Connection timeout after 160ms on conn 1160
+2024-03-01 09:18:47 INFO [web.api] GET /users/161 200
+2024-03-01 09:18:54 WARNING [web.api] Slow request: 486ms
+2024-03-01 09:19:01 ERROR [web.auth] Token validation failed for user 163
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:19:08 DEBUG [cache] hit ratio 0.64
+2024-03-01 09:19:15 INFO [web.api] POST /orders/165 201
+2024-03-01 09:19:22 INFO [web.api] POST /orders/166 201
+2024-03-01 09:19:29 INFO [web.api] POST /orders/167 201
+2024-03-01 09:19:36 ERROR [db.pool] Connection timeout after 168ms on conn 1168
+2024-03-01 09:19:43 INFO [web.api] GET /users/169 200
+2024-03-01 09:19:50 WARNING [web.api] Slow request: 510ms
+2024-03-01 09:19:57 ERROR [web.auth] Token validation failed for user 171
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:20:04 DEBUG [cache] hit ratio 0.72
+2024-03-01 09:20:11 INFO [web.api] POST /orders/173 201
+2024-03-01 09:20:18 INFO [web.api] POST /orders/174 201
+2024-03-01 09:20:25 INFO [web.api] POST /orders/175 201
+2024-03-01 09:20:32 ERROR [db.pool] Connection timeout after 176ms on conn 1176
+2024-03-01 09:20:39 INFO [web.api] GET /users/177 200
+2024-03-01 09:20:46 WARNING [web.api] Slow request: 534ms
+2024-03-01 09:20:53 ERROR [web.auth] Token validation failed for user 179
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:21:00 DEBUG [cache] hit ratio 0.80
+2024-03-01 09:21:07 INFO [web.api] POST /orders/181 201
+2024-03-01 09:21:14 INFO [web.api] POST /orders/182 201
+2024-03-01 09:21:21 INFO [web.api] POST /orders/183 201
+2024-03-01 09:21:28 ERROR [db.pool] Connection timeout after 184ms on conn 1184
+2024-03-01 09:21:35 INFO [web.api] GET /users/185 200
+2024-03-01 09:21:42 WARNING [web.api] Slow request: 558ms
+2024-03-01 09:21:49 ERROR [web.auth] Token validation failed for user 187
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:21:56 DEBUG [cache] hit ratio 0.88
+2024-03-01 09:22:03 INFO [web.api] POST /orders/189 201
+2024-03-01 09:22:10 INFO [web.api] POST /orders/190 201
+2024-03-01 09:22:17 INFO [web.api] POST /orders/191 201
+2024-03-01 09:22:24 ERROR [db.pool] Connection timeout after 192ms on conn 1192
+2024-03-01 09:22:31 INFO [web.api] GET /users/193 200
+2024-03-01 09:22:38 WARNING [web.api] Slow request: 582ms
+2024-03-01 09:22:45 ERROR [web.auth] Token validation failed for user 195
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:22:52 DEBUG [cache] hit ratio 0.96
+2024-03-01 09:22:59 INFO [web.api] POST /orders/197 201
+2024-03-01 09:23:06 INFO [web.api] POST /orders/198 201
+2024-03-01 09:23:13 INFO [web.api] POST /orders/199 201
+2024-03-01 09:23:20 ERROR [db.pool] Connection timeout after 200ms on conn 1200
+2024-03-01 09:23:27 INFO [web.api] GET /users/201 200
+2024-03-01 09:23:34 WARNING [web.api] Slow request: 606ms
+2024-03-01 09:23:41 ERROR [web.auth] Token validation failed for user 203
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:23:48 DEBUG [cache] hit ratio 0.4
+2024-03-01 09:23:55 INFO [web.api] POST /orders/205 201
+2024-03-01 09:24:02 INFO [web.api] POST /orders/206 201
+2024-03-01 09:24:09 INFO [web.api] POST /orders/207 201
+2024-03-01 09:24:16 ERROR [db.pool] Connection timeout after 208ms on conn 1208
+2024-03-01 09:24:23 INFO [web.api] GET /users/209 200
+2024-03-01 09:24:30 WARNING [web.api] Slow request: 630ms
+2024-03-01 09:24:37 ERROR [web.auth] Token validation failed for user 211
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:24:44 DEBUG [cache] hit ratio 0.12
+2024-03-01 09:24:51 INFO [web.api] POST /orders/213 201
+2024-03-01 09:24:58 INFO [web.api] POST /orders/214 201
+2024-03-01 09:25:05 INFO [web.api] POST /orders/215 201
+2024-03-01 09:25:12 ERROR [db.pool] Connection timeout after 216ms on conn 1216
+2024-03-01 09:25:19 INFO [web.api] GET /users/217 200
+2024-03-01 09:25:26 WARNING [web.api] Slow request: 654ms
+2024-03-01 09:25:33 ERROR [web.auth] Token validation failed for user 219
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:25:40 DEBUG [cache] hit ratio 0.20
+2024-03-01 09:25:47 INFO [web.api] POST /orders/221 201
+2024-03-01 09:25:54 INFO [web.api] POST /orders/222 201
+2024-03-01 09:26:01 INFO [web.api] POST /orders/223 201
+2024-03-01 09:26:08 ERROR [db.pool] Connection timeout after 224ms on conn 1224
+2024-03-01 09:26:15 INFO [web.api] GET /users/225 200
+2024-03-01 09:26:22 WARNING [web.api] Slow request: 678ms
+2024-03-01 09:26:29 ERROR [web.auth] Token validation failed for user 227
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:26:36 DEBUG [cache] hit ratio 0.28
+2024-03-01 09:26:43 INFO [web.api] POST /orders/229 201
+2024-03-01 09:26:50 INFO [web.api] POST /orders/230 201
+2024-03-01 09:26:57 INFO [web.api] POST /orders/231 201
+2024-03-01 09:27:04 ERROR [db.pool] Connection timeout after 232ms on conn 1232
+2024-03-01 09:27:11 INFO [web.api] GET /users/233 200
+2024-03-01 09:27:18 WARNING [web.api] Slow request: 702ms
+2024-03-01 09:27:25 ERROR [web.auth] Token validation failed for user 235
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:27:32 DEBUG [cache] hit ratio 0.36
+2024-03-01 09:27:39 INFO [web.api] POST /orders/237 201
+2024-03-01 09:27:46 INFO [web.api] POST /orders/238 201
+2024-03-01 09:27:53 INFO [web.api] POST /orders/239 201
+2024-03-01 09:28:00 ERROR [db.pool] Connection timeout after 240ms on conn 1240
+2024-03-01 09:28:07 INFO [web.api] GET /users/241 200
+2024-03-01 09:28:14 WARNING [web.api] Slow request: 726ms
+2024-03-01 09:28:21 ERROR [web.auth] Token validation failed for user 243
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:28:28 DEBUG [cache] hit ratio 0.44
+2024-03-01 09:28:35 INFO [web.api] POST /orders/245 201
+2024-03-01 09:28:42 INFO [web.api] POST /orders/246 201
+2024-03-01 09:28:49 INFO [web.api] POST /orders/247 201
+2024-03-01 09:28:56 ERROR [db.pool] Connection timeout after 248ms on conn 1248
+2024-03-01 09:29:03 INFO [web.api] GET /users/249 200
+2024-03-01 09:29:10 WARNING [web.api] Slow request: 750ms
+2024-03-01 09:29:17 ERROR [web.auth] Token validation failed for user 251
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:29:24 DEBUG [cache] hit ratio 0.52
+2024-03-01 09:29:31 INFO [web.api] POST /orders/253 201
+2024-03-01 09:29:38 INFO [web.api] POST /orders/254 201
+2024-03-01 09:29:45 INFO [web.api] POST /orders/255 201
+2024-03-01 09:29:52 ERROR [db.pool] Connection timeout after 256ms on conn 1256
+2024-03-01 09:29:59 INFO [web.api] GET /users/257 200
+2024-03-01 09:30:06 WARNING [web.api] Slow request: 774ms
+2024-03-01 09:30:13 ERROR [web.auth] Token validation failed for user 259
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:30:20 DEBUG [cache] hit ratio 0.60
+2024-03-01 09:30:27 INFO [web.api] POST /orders/261 201
+2024-03-01 09:30:34 INFO [web.api] POST /orders/262 201
+2024-03-01 09:30:41 INFO [web.api] POST /orders/263 201
+2024-03-01 09:30:48 ERROR [db.pool] Connection timeout after 264ms on conn 1264
+2024-03-01 09:30:55 INFO [web.api] GET /users/265 200
+2024-03-01 09:31:02 WARNING [web.api] Slow request: 798ms
+2024-03-01 09:31:09 ERROR [web.auth] Token validation failed for user 267
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:31:16 DEBUG [cache] hit ratio 0.68
+2024-03-01 09:31:23 INFO [web.api] POST /orders/269 201
+2024-03-01 09:31:30 INFO [web.api] POST /orders/270 201
+2024-03-01 09:31:37 INFO [web.api] POST /orders/271 201
+2024-03-01 09:31:44 ERROR [db.pool] Connection timeout after 272ms on conn 1272
+2024-03-01 09:31:51 INFO [web.api] GET /users/273 200
+2024-03-01 09:31:58 WARNING [web.api] Slow request: 822ms
+2024-03-01 09:32:05 ERROR [web.auth] Token validation failed for user 275
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:32:12 DEBUG [cache] hit ratio 0.76
+2024-03-01 09:32:19 INFO [web.api] POST /orders/277 201
+2024-03-01 09:32:26 INFO [web.api] POST /orders/278 201
+2024-03-01 09:32:33 INFO [web.api] POST /orders/279 201
+2024-03-01 09:32:40 ERROR [db.pool] Connection timeout after 280ms on conn 1280
+2024-03-01 09:32:47 INFO [web.api] GET /users/281 200
+2024-03-01 09:32:54 WARNING [web.api] Slow request: 846ms
+2024-03-01 09:33:01 ERROR [web.auth] Token validation failed for user 283
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:33:08 DEBUG [cache] hit ratio 0.84
+2024-03-01 09:33:15 INFO [web.api] POST /orders/285 201
+2024-03-01 09:33:22 INFO [web.api] POST /orders/286 201
+2024-03-01 09:33:29 INFO [web.api] POST /orders/287 201
+2024-03-01 09:33:36 ERROR [db.pool] Connection timeout after 288ms on conn 1288
+2024-03-01 09:33:43 INFO [web.api] GET /users/289 200
+2024-03-01 09:33:50 WARNING [web.api] Slow request: 870ms
+2024-03-01 09:33:57 ERROR [web.auth] Token validation failed for user 291
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:34:04 DEBUG [cache] hit ratio 0.92
+2024-03-01 09:34:11 INFO [web.api] POST /orders/293 201
+2024-03-01 09:34:18 INFO [web.api] POST /orders/294 201
+2024-03-01 09:34:25 INFO [web.api] POST /orders/295 201
+2024-03-01 09:34:32 ERROR [db.pool] Connection timeout after 296ms on conn 1296
+2024-03-01 09:34:39 INFO [web.api] GET /users/297 200
+2024-03-01 09:34:46 WARNING [web.api] Slow request: 894ms
+2024-03-01 09:34:53 ERROR [web.auth] Token validation failed for user 299
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:35:00 DEBUG [cache] hit ratio 0.0
+2024-03-01 09:35:07 INFO [web.api] POST /orders/301 201
+2024-03-01 09:35:14 INFO [web.api] POST /orders/302 201
+2024-03-01 09:35:21 INFO [web.api] POST /orders/303 201
+2024-03-01 09:35:28 ERROR [db.pool] Connection timeout after 304ms on conn 1304
+2024-03-01 09:35:35 INFO [web.api] GET /users/305 200
+2024-03-01 09:35:42 WARNING [web.api] Slow request: 918ms
+2024-03-01 09:35:49 ERROR [web.auth] Token validation failed for user 307
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:35:56 DEBUG [cache] hit ratio 0.8
+2024-03-01 09:36:03 INFO [web.api] POST /orders/309 201
+2024-03-01 09:36:10 INFO [web.api] POST /orders/310 201
+2024-03-01 09:36:17 INFO [web.api] POST /orders/311 201
+2024-03-01 09:36:24 ERROR [db.pool] Connection timeout after 312ms on conn 1312
+2024-03-01 09:36:31 INFO [web.api] GET /users/313 200
+2024-03-01 09:36:38 WARNING [web.api] Slow request: 942ms
+2024-03-01 09:36:45 ERROR [web.auth] Token validation failed for user 315
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:36:52 DEBUG [cache] hit ratio 0.16
+2024-03-01 09:36:59 INFO [web.api] POST /orders/317 201
+2024-03-01 09:37:06 INFO [web.api] POST /orders/318 201
+2024-03-01 09:37:13 INFO [web.api] POST /orders/319 201
+2024-03-01 09:37:20 ERROR [db.pool] Connection timeout after 320ms on conn 1320
+2024-03-01 09:37:27 INFO [web.api] GET /users/321 200
+2024-03-01 09:37:34 WARNING [web.api] Slow request: 966ms
+2024-03-01 09:37:41 ERROR [web.auth] Token validation failed for user 323
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:37:48 DEBUG [cache] hit ratio 0.24
+2024-03-01 09:37:55 INFO [web.api] POST /orders/325 201
+2024-03-01 09:38:02 INFO [web.api] POST /orders/326 201
+2024-03-01 09:38:09 INFO [web.api] POST /orders/327 201
+2024-03-01 09:38:16 ERROR [db.pool] Connection timeout after 328ms on conn 1328
+2024-03-01 09:38:23 INFO [web.api] GET /users/329 200
+2024-03-01 09:38:30 WARNING [web.api] Slow request: 990ms
+2024-03-01 09:38:37 ERROR [web.auth] Token validation failed for user 331
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:38:44 DEBUG [cache] hit ratio 0.32
+2024-03-01 09:38:51 INFO [web.api] POST /orders/333 201
+2024-03-01 09:38:58 INFO [web.api] POST /orders/334 201
+2024-03-01 09:39:05 INFO [web.api] POST /orders/335 201
+2024-03-01 09:39:12 ERROR [db.pool] Connection timeout after 336ms on conn 1336
+2024-03-01 09:39:19 INFO [web.api] GET /users/337 200
+2024-03-01 09:39:26 WARNING [web.api] Slow request: 1014ms
+2024-03-01 09:39:33 ERROR [web.auth] Token validation failed for user 339
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:39:40 DEBUG [cache] hit ratio 0.40
+2024-03-01 09:39:47 INFO [web.api] POST /orders/341 201
+2024-03-01 09:39:54 INFO [web.api] POST /orders/342 201
+2024-03-01 09:40:01 INFO [web.api] POST /orders/343 201
+2024-03-01 09:40:08 ERROR [db.pool] Connection timeout after 344ms on conn 1344
+2024-03-01 09:40:15 INFO [web.api] GET /users/345 200
+2024-03-01 09:40:22 WARNING [web.api] Slow request: 1038ms
+2024-03-01 09:40:29 ERROR [web.auth] Token validation failed for user 347
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:40:36 DEBUG [cache] hit ratio 0.48
+2024-03-01 09:40:43 INFO [web.api] POST /orders/349 201
+2024-03-01 09:40:50 INFO [web.api] POST /orders/350 201
+2024-03-01 09:40:57 INFO [web.api] POST /orders/351 201
+2024-03-01 09:41:04 ERROR [db.pool] Connection timeout after 352ms on conn 1352
+2024-03-01 09:41:11 INFO [web.api] GET /users/353 200
+2024-03-01 09:41:18 WARNING [web.api] Slow request: 1062ms
+2024-03-01 09:41:25 ERROR [web.auth] Token validation failed for user 355
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:41:32 DEBUG [cache] hit ratio 0.56
+2024-03-01 09:41:39 INFO [web.api] POST /orders/357 201
+2024-03-01 09:41:46 INFO [web.api] POST /orders/358 201
+2024-03-01 09:41:53 INFO [web.api] POST /orders/359 201
+2024-03-01 09:42:00 ERROR [db.pool] Connection timeout after 360ms on conn 1360
+2024-03-01 09:42:07 INFO [web.api] GET /users/361 200
+2024-03-01 09:42:14 WARNING [web.api] Slow request: 1086ms
+2024-03-01 09:42:21 ERROR [web.auth] Token validation failed for user 363
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:42:28 DEBUG [cache] hit ratio 0.64
+2024-03-01 09:42:35 INFO [web.api] POST /orders/365 201
+2024-03-01 09:42:42 INFO [web.api] POST /orders/366 201
+2024-03-01 09:42:49 INFO [web.api] POST /orders/367 201
+2024-03-01 09:42:56 ERROR [db.pool] Connection timeout after 368ms on conn 1368
+2024-03-01 09:43:03 INFO [web.api] GET /users/369 200
+2024-03-01 09:43:10 WARNING [web.api] Slow request: 1110ms
+2024-03-01 09:43:17 ERROR [web.auth] Token validation failed for user 371
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:43:24 DEBUG [cache] hit ratio 0.72
+2024-03-01 09:43:31 INFO [web.api] POST /orders/373 201
+2024-03-01 09:43:38 INFO [web.api] POST /orders/374 201
+2024-03-01 09:43:45 INFO [web.api] POST /orders/375 201
+2024-03-01 09:43:52 ERROR [db.pool] Connection timeout after 376ms on conn 1376
+2024-03-01 09:43:59 INFO [web.api] GET /users/377 200
+2024-03-01 09:44:06 WARNING [web.api] Slow request: 1134ms
+2024-03-01 09:44:13 ERROR [web.auth] Token validation failed for user 379
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:44:20 DEBUG [cache] hit ratio 0.80
+2024-03-01 09:44:27 INFO [web.api] POST /orders/381 201
+2024-03-01 09:44:34 INFO [web.api] POST /orders/382 201
+2024-03-01 09:44:41 INFO [web.api] POST /orders/383 201
+2024-03-01 09:44:48 ERROR [db.pool] Connection timeout after 384ms on conn 1384
+2024-03-01 09:44:55 INFO [web.api] GET /users/385 200
+2024-03-01 09:45:02 WARNING [web.api] Slow request: 1158ms
+2024-03-01 09:45:09 ERROR [web.auth] Token validation failed for user 387
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:45:16 DEBUG [cache] hit ratio 0.88
+2024-03-01 09:45:23 INFO [web.api] POST /orders/389 201
+2024-03-01 09:45:30 INFO [web.api] POST /orders/390 201
+2024-03-01 09:45:37 INFO [web.api] POST /orders/391 201
+2024-03-01 09:45:44 ERROR [db.pool] Connection timeout after 392ms on conn 1392
+2024-03-01 09:45:51 INFO [web.api] GET /users/393 200
+2024-03-01 09:45:58 WARNING [web.api] Slow request: 1182ms
+2024-03-01 09:46:05 ERROR [web.auth] Token validation failed for user 395
+Traceback (most recent call last):
+  File "auth.py", line 88, in validate
+ValueError: bad signature
+2024-03-01 09:46:12 DEBUG [cache] hit ratio 0.96
+2024-03-01 09:46:19 INFO [web.api] POST /orders/397 201
+2024-03-01 09:46:26 INFO [web.api] POST /orders/398 201
+2024-03-01 09:46:33 INFO [web.api] POST /orders/399 201

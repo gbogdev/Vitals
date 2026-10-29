@@ -13,6 +13,16 @@ Desktop utility (Python, PySide6) for inspecting local system resource usage and
 
 Config: `%APPDATA%\Vitals\config.json` (override with `VITALS_CONFIG`). Missing keys use defaults; see `vitals/config.py`.
 
+## Screenshots
+
+Captured from the app on Windows. The log shown is the synthetic sample log, not real data.
+
+![System page with live CPU, memory and network charts](docs/screenshots/system.png)
+
+![Logs page filtered to "timeout", with context around the selected entry](docs/screenshots/logs.png)
+
+![Diagnostics page listing rule matches for recurring errors](docs/screenshots/diagnostics.png)
+
 ## Install
 
 ```
