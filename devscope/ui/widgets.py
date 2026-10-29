@@ -46,6 +46,23 @@ QScrollBar::handle:vertical {{ background: #4a4d54; border-radius: 4px; min-heig
 QScrollBar:horizontal {{ background: {BG}; height: 10px; margin: 0; }}
 QScrollBar::handle:horizontal {{ background: #4a4d54; border-radius: 4px; min-width: 24px; }}
 QScrollBar::add-line, QScrollBar::sub-line {{ width: 0; height: 0; }}
+QWidget#sidebar {{ background: #17181a; border-right: 1px solid {BORDER}; }}
+QLabel#brand {{ background: transparent; font-size: 13pt; font-weight: 700; padding: 2px 6px 14px 6px; }}
+QListWidget#nav {{ background: transparent; border: 0; outline: 0; }}
+QListWidget#nav::item {{ padding: 9px 12px; margin: 1px 0; border-radius: 6px; color: {MUTED}; }}
+QListWidget#nav::item:hover {{ background: #232428; color: {TEXT}; }}
+QListWidget#nav::item:selected {{ background: #2b3342; color: {TEXT}; }}
+QLabel#pageTitle {{ font-size: 18pt; font-weight: 600; }}
+QPushButton[primary="true"] {{ background: {ACCENT}; border-color: {ACCENT}; color: #0f1115; font-weight: 600; }}
+QPushButton[primary="true"]:hover {{ background: #6c9ad4; }}
+QToolButton {{ background: {SURFACE2}; border: 1px solid {BORDER}; border-radius: 4px; padding: 5px 12px; }}
+QToolButton:hover {{ background: #383b41; }}
+QToolButton::menu-indicator {{ image: none; width: 0; }}
+QMenu {{ background: {SURFACE2}; border: 1px solid {BORDER}; padding: 4px; }}
+QMenu::item {{ padding: 6px 18px; border-radius: 4px; }}
+QMenu::item:selected {{ background: #34507a; }}
+QLabel#badge {{ background: {SURFACE2}; border: 1px solid {BORDER}; border-radius: 10px; padding: 3px 12px; }}
+QLabel#badge[active="true"] {{ border-color: #b99a63; color: #e0c48c; }}
 QToolTip {{ background: {SURFACE2}; color: {TEXT}; border: 1px solid {BORDER}; }}
 """
 
@@ -83,6 +100,15 @@ class LineChart(QWidget):
         self.values: list = []
         self.setMinimumHeight(110)
 
+    def _fmt(self, v: float) -> str:
+        if self.unit.strip() != "B/s":
+            return f"{v:.1f}{self.unit}"
+        for u in ("B/s", "KB/s", "MB/s"):
+            if v < 1024:
+                return f"{v:.1f} {u}"
+            v /= 1024
+        return f"{v:.1f} GB/s"
+
     def set_values(self, values: list):
         self.values = values
         self.update()
@@ -99,9 +125,9 @@ class LineChart(QWidget):
         ymax = self.y_max or max(ok + [1.0]) * 1.15
         p.setPen(QColor(TEXT))
         p.drawText(10, 17, self.title)
-        last = f"{ok[-1]:.1f}{self.unit}" if ok else "n/a"
+        last = self._fmt(ok[-1]) if ok else "n/a"
         p.setPen(QColor(MUTED))
-        p.drawText(QRectF(0, 4, w - 10, 18), Qt.AlignRight | Qt.AlignVCenter, f"{last}  (max {ymax:.0f}{self.unit})")
+        p.drawText(QRectF(0, 4, w - 10, 18), Qt.AlignRight | Qt.AlignVCenter, f"{last}  (scale to {self._fmt(ymax)})")
         px0, px1, py0, py1 = 8, w - 8, top, h - 8
         p.setPen(QPen(QColor("#33363b"), 1))
         for i in range(1, 4):

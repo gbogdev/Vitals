@@ -3,9 +3,10 @@ from __future__ import annotations
 from datetime import datetime
 
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import (QCheckBox, QDoubleSpinBox, QFileDialog, QGridLayout, QHBoxLayout, QHeaderView, QLabel, QLineEdit,
-                               QMainWindow, QMessageBox, QPlainTextEdit, QPushButton, QSplitter, QTableWidget,
-                               QTableWidgetItem, QTabWidget, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QCheckBox, QDoubleSpinBox, QFileDialog, QFrame, QGridLayout, QHBoxLayout,
+                               QHeaderView, QLabel, QLineEdit, QListWidget, QMainWindow, QMenu, QMessageBox,
+                               QPlainTextEdit, QPushButton, QSplitter, QStackedWidget, QTableWidget,
+                               QTableWidgetItem, QTabWidget, QToolButton, QVBoxLayout, QWidget)
 
 import re
 from bisect import bisect_left
@@ -75,12 +76,38 @@ class MainWindow(QMainWindow):
         self.all_groups: list = []
         self.alerts: list = []
 
-        tabs = QTabWidget()
-        self.setCentralWidget(tabs)
-        tabs.addTab(self._build_monitor(), "System")
-        tabs.addTab(self._build_processes(), "Processes")
-        tabs.addTab(self._build_logs(), "Logs")
-        tabs.addTab(self._build_diag(), "Diagnostics")
+        root = QWidget()
+        self.setCentralWidget(root)
+        outer = QHBoxLayout(root)
+        outer.setContentsMargins(0, 0, 0, 0)
+        outer.setSpacing(0)
+        side = QWidget()
+        side.setObjectName("sidebar")
+        side.setFixedWidth(190)
+        sv = QVBoxLayout(side)
+        sv.setContentsMargins(12, 16, 12, 12)
+        brand = QLabel("DevScope")
+        brand.setObjectName("brand")
+        sv.addWidget(brand)
+        self.nav = QListWidget()
+        self.nav.setObjectName("nav")
+        self.stack = QStackedWidget()
+        pages = [("System", "Live resource usage", self._build_monitor()),
+                 ("Processes", "Top processes by CPU", self._build_processes()),
+                 ("Logs", "Search, filter and group log entries", self._build_logs()),
+                 ("Diagnostics", "Rule matches on measured data", self._build_diag())]
+        for name, sub, body in pages:
+            self.nav.addItem(name)
+            self.stack.addWidget(self._page(name, sub, body))
+        self.nav.currentRowChanged.connect(self.stack.setCurrentIndex)
+        self.nav.setCurrentRow(0)
+        sv.addWidget(self.nav, 1)
+        foot = QLabel("Local only. Nothing is uploaded.")
+        foot.setProperty("muted", True)
+        foot.setWordWrap(True)
+        sv.addWidget(foot)
+        outer.addWidget(side)
+        outer.addWidget(self.stack, 1)
         self.status = self.statusBar()
         self.status.showMessage("Collecting... all data stays on this machine.")
 
@@ -88,25 +115,47 @@ class MainWindow(QMainWindow):
         self.sampler.sampled.connect(self.on_sample)
         self.sampler.start()
 
-    # ---- System tab
+    def _page(self, title, subtitle, body, actions=None):
+        """Standard page: heading + muted subtitle (+ optional action row) above the body."""
+        w = QWidget()
+        v = QVBoxLayout(w)
+        v.setContentsMargins(24, 18, 24, 12)
+        v.setSpacing(12)
+        head = QHBoxLayout()
+        col = QVBoxLayout()
+        col.setSpacing(0)
+        h = QLabel(title)
+        h.setObjectName("pageTitle")
+        s = QLabel(subtitle)
+        s.setProperty("muted", True)
+        col.addWidget(h)
+        col.addWidget(s)
+        head.addLayout(col, 1)
+        for a in getattr(body, "page_actions", []):
+            head.addWidget(a)
+        v.addLayout(head)
+        v.addWidget(body, 1)
+        return w
+
+    # ---- System page
     def _build_monitor(self):
         w = QWidget()
         v = QVBoxLayout(w)
-        bar = QHBoxLayout()
-        bar.addWidget(QLabel("Refresh (s):"))
+        v.setContentsMargins(0, 0, 0, 0)
+        v.setSpacing(12)
+        lbl = QLabel("Refresh every")
+        lbl.setProperty("muted", True)
         self.interval = QDoubleSpinBox()
         self.interval.setRange(0.5, 60)
+        self.interval.setSuffix(" s")
         self.interval.setValue(self.cfg["refresh_s"])
         self.interval.valueChanged.connect(self.on_interval)
-        bar.addWidget(self.interval)
-        b = QPushButton("Export report...")
-        b.clicked.connect(self.export_report)
-        bar.addWidget(b)
         c = QPushButton("Clear history")
         c.clicked.connect(self.history.clear)
-        bar.addWidget(c)
-        bar.addStretch()
-        v.addLayout(bar)
+        b = QPushButton("Export report")
+        b.setProperty("primary", True)
+        b.clicked.connect(self.export_report)
+        w.page_actions = [lbl, self.interval, c, b]
         self.tiles = {k: StatTile(t) for k, t in
                       (("cpu", "CPU"), ("mem", "Memory"), ("disk", "Disk"), ("net", "Network"))}
         row = QHBoxLayout()
@@ -130,55 +179,75 @@ class MainWindow(QMainWindow):
     def _build_processes(self):
         w = QWidget()
         v = QVBoxLayout(w)
+        v.setContentsMargins(0, 0, 0, 0)
         self.proc_table = table(["PID", "Name", "CPU %", "Memory (RSS)"])
         self.proc_table.horizontalHeader().setSortIndicator(2, Qt.DescendingOrder)
-        v.addWidget(QLabel("Top processes by CPU (CPU % is per-core; n/a = access denied)"))
+        note = QLabel("CPU % is per core and can exceed 100 on multi-core systems. n/a = access denied.")
+        note.setProperty("muted", True)
         v.addWidget(self.proc_table)
+        v.addWidget(note)
         return w
 
     # ---- Logs tab
     def _build_logs(self):
         w = QWidget()
         v = QVBoxLayout(w)
-        r1 = QHBoxLayout()
-        ob = QPushButton("Open log...")
+        v.setContentsMargins(0, 0, 0, 0)
+        v.setSpacing(10)
+        ob = QPushButton("Open log")
+        ob.setProperty("primary", True)
         ob.clicked.connect(self.open_log)
-        r1.addWidget(ob)
+        eb = QToolButton()
+        eb.setText("Export filtered")
+        eb.setPopupMode(QToolButton.InstantPopup)
+        menu = QMenu(eb)
+        for fmt, label in (("csv", "CSV"), ("json", "JSON"), ("text", "Text")):
+            menu.addAction(label, lambda f=fmt: self.export_logs(f))
+        eb.setMenu(menu)
+        w.page_actions = [eb, ob]
+
+        card = QFrame()
+        card.setObjectName("tile")
+        cv = QVBoxLayout(card)
+        cv.setContentsMargins(12, 10, 12, 10)
+        cv.setSpacing(8)
+        r1 = QHBoxLayout()
         self.search = QLineEdit()
         self.search.setPlaceholderText("Search message text")
         self.search.returnPressed.connect(self.refilter)
         r1.addWidget(self.search, 1)
+        self.source = QLineEdit()
+        self.source.setPlaceholderText("Source contains")
+        self.source.setMaximumWidth(160)
+        self.source.returnPressed.connect(self.refilter)
+        r1.addWidget(self.source)
         self.regex_cb = QCheckBox("Regex")
         self.case_cb = QCheckBox("Match case")
         r1.addWidget(self.regex_cb)
         r1.addWidget(self.case_cb)
-        self.source = QLineEdit()
-        self.source.setPlaceholderText("Source contains")
-        self.source.setMaximumWidth(150)
-        self.source.returnPressed.connect(self.refilter)
-        r1.addWidget(self.source)
-        v.addLayout(r1)
+        cv.addLayout(r1)
         r2 = QHBoxLayout()
         self.level_cbs = {}
         for lv in LEVELS:
-            cb = QCheckBox(lv)
+            cb = QCheckBox(lv.capitalize())
             cb.setChecked(True)
             self.level_cbs[lv] = cb
             r2.addWidget(cb)
+        r2.addStretch()
         self.start = QLineEdit()
-        self.start.setPlaceholderText("From YYYY-MM-DD[ HH:MM:SS]")
+        self.start.setPlaceholderText("From date")
         self.end = QLineEdit()
-        self.end.setPlaceholderText("To YYYY-MM-DD[ HH:MM:SS]")
-        r2.addWidget(self.start)
-        r2.addWidget(self.end)
-        ab = QPushButton("Apply")
+        self.end.setPlaceholderText("To date")
+        for e in (self.start, self.end):
+            e.setMaximumWidth(150)
+            e.setToolTip("YYYY-MM-DD or YYYY-MM-DD HH:MM[:SS]")
+            e.returnPressed.connect(self.refilter)
+            r2.addWidget(e)
+        ab = QPushButton("Apply filters")
         ab.clicked.connect(self.refilter)
         r2.addWidget(ab)
-        for fmt in ("csv", "json", "text"):
-            b = QPushButton(f"Export {fmt}")
-            b.clicked.connect(lambda _=False, f=fmt: self.export_logs(f))
-            r2.addWidget(b)
-        v.addLayout(r2)
+        cv.addLayout(r2)
+        v.addWidget(card)
 
         split = QSplitter(Qt.Vertical)
         self.log_table = table(["Line", "Time", "Level", "Source", "Message"])
@@ -198,10 +267,17 @@ class MainWindow(QMainWindow):
     def _build_diag(self):
         w = QWidget()
         v = QVBoxLayout(w)
-        v.addWidget(QLabel("Alerts: a configured threshold rule matched measured data. "
-                           "An alert is not a confirmed fault. Rules are in the config file."))
+        v.setContentsMargins(0, 0, 0, 0)
+        self.alert_summary = QLabel("No alerts.")
+        self.alert_summary.setObjectName("badge")
+        note = QLabel("An alert means a configured threshold rule matched measured data. It is not a confirmed "
+                      "fault. Rules are set in the config file.")
+        note.setProperty("muted", True)
+        note.setWordWrap(True)
         self.alert_table = table(["Type", "Basis", "Alert", "Detail"])
-        v.addWidget(self.alert_table)
+        v.addWidget(self.alert_summary, 0, Qt.AlignLeft)
+        v.addWidget(note)
+        v.addWidget(self.alert_table, 1)
         return w
 
     # ---- slots
@@ -236,6 +312,14 @@ class MainWindow(QMainWindow):
         alerts += check_log_rules(self.all_groups, self.cfg["log_rule"])
         self.alerts = alerts
         fill(self.alert_table, [(a.kind, a.basis, a.title, a.detail) for a in alerts])
+        n = len(alerts)
+        self.alert_summary.setText(f"{n} alert{'s' if n != 1 else ''} (rule matches)" if n else "No alerts")
+        self.alert_summary.setProperty("active", bool(n))
+        self.alert_summary.style().unpolish(self.alert_summary)
+        self.alert_summary.style().polish(self.alert_summary)
+        item = self.nav.item(3)
+        if item:
+            item.setText(f"Diagnostics ({n})" if n else "Diagnostics")
 
     def open_log(self):
         path, _ = QFileDialog.getOpenFileName(self, "Open log", "", "Logs (*.log *.txt *.out);;All files (*)")
